@@ -19,6 +19,12 @@ public class UserService {
 		int result = userRepository.joinUser(userDto);
 		return result;
 	}
+
+	public String idCheck(String userId) {
+		System.out.println("idCheck service 실행");
+		String idChecked = userRepository.idCheck(userId);
+		return idChecked;
+	}
 	
 
 }

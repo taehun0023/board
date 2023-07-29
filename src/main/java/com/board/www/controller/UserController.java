@@ -5,6 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.board.www.dto.UserDto;
 import com.board.www.service.UserService;
@@ -25,6 +26,21 @@ public class UserController {
 	public String join() {
 		log.info("join(GET) 메소드 실행");
 		return "/user/join";
+	}
+	
+	// ID중복 체크
+	@ResponseBody
+	@GetMapping(value = "/idCheck")
+	public String idCheck(String userId) {
+		log.info("idCheck(GET) 메소드 실행");
+		String idChecked = userService.idCheck(userId);
+		
+		String result = "yes";
+		
+		if (idChecked != null) {
+			result = "no";
+		}
+		return result;
 	}
 	
 	// 회원 등록

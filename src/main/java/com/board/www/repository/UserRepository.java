@@ -12,4 +12,6 @@ import com.board.www.dto.UserDto;
 public interface UserRepository {
 	int joinUser(UserDto userDto);
 
+	String idCheck(String userId);
+
 }

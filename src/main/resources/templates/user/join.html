@@ -20,22 +20,29 @@ layout:decorate="~{layouts/main}"
 				</thead>
 				<tbody>
 					<tr>
-						<td>아이디 <input type="text" name="userId"></td>
+						<td><label for="user_id"><span>아이디</span></label> 
+						<input type="text" id="user_id" name="userId"></td>
+						<td><div id="idCheck"></div></td>
 					</tr>
 					<tr>
-						<td>비밀번호 <input type="password" name="userPassword"></td>
+						<td><label for="password"><span>비밀번호</span></label> 
+						<input type="password" id="password" name="userPassword"></td>
 					</tr>
 					<tr>
-						<td>이름 <input type="text" name="userName"></td>
+						<td><label for="user_name"><span>이름</span></label> 
+						<input type="text" id="user_name" name="userName"></td>
 					</tr>
 					<tr>
-						<td>주소 <input type="text" name="address"></td>
+						<td><label for="address"><span>주소</span></label> 
+						<input type="text" id="address" name="address"></td>
 					</tr>
 					<tr>
-						<td>핸드폰 <input type="text" name="phone"></td>
+						<td><label for="phone"><span>핸드폰</span></label> 
+						<input type="text" id="phone" name="phone"></td>
 					</tr>
 					<tr>
-						<td>이메일 <input type="text" name="email"></td>
+						<td><label for="email"><span>이메일</span></label> 
+						<input type="text" id="email" name="email"></td>
 					</tr>
 					
 				</tbody>
@@ -49,6 +56,25 @@ layout:decorate="~{layouts/main}"
 
 $(function(){
 	
+	$("#user_id").keyup(function() {
+		var id = document.getElementById('user_id').value;
+		
+		$.ajax({
+			url : "/user/idCheck",
+			type : "GET",
+			data : {
+				"userId" : id
+			},
+			success : function(data) {
+				if (data == "yes") {
+					document.getElementById('idCheck').innerHTML = "";
+				} else {
+					document.getElementById('idCheck').innerHTML = "중복된 ID가 존재 합니다."
+					document.getElementById('idCheck').style.color = "red";
+				}
+			}
+		});
+	}); 
 	
 });
 
